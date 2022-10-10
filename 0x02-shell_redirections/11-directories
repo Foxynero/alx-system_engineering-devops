@@ -1,2 +1,2 @@
 #!/bin/bash
-find . ! -name . -prune ! -type d | grep -c /
+find . -type d -path './*' -print | wc -1
