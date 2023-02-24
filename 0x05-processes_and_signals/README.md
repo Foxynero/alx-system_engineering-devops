@@ -1,1 +1,1 @@
-About processes and signals
+Project on processes and signals - ALX SE
