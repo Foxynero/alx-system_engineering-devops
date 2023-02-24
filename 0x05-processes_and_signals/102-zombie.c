@@ -1,1 +1,1 @@
-#!/usr/bin/env bash
+#include <stdio.h>
