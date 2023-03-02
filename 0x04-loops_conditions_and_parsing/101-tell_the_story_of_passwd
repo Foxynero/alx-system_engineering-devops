@@ -2,9 +2,10 @@
 # Tells a story based on the contents of the `/etc/passwd` file.
 
 
-while IFS=':' read username password uid gid info home shell; do
+while IFS=: read -r f1 f2 f3 f4 f5 f6 f7; do
 	echo "The user $username is part of the $gid gang,"\
-		"lives in $home and rides $shell."\
-		"$uid's place is protected by the passcode $password,"\
+		"lives in HOME_DIRECTORY and rides $shell."\
+		"USER ID's place is protected by the passcode $password,"\
 		"more info about the user here: $info"
-	done < "/etc/passwd"		
+
+done</etc/passwd
