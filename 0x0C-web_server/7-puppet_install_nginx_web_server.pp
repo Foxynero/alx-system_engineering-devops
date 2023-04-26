@@ -12,7 +12,7 @@ file_line { 'put_in_line':
   ensure => present,
   path   => 'etc/nginx/sites-available/default',
   after  => '/listen 80 default_server;'
-  line   => 'rewrite ^/redirect_me 301 Moved Permanently  permanent;'
+  line   => 'rewrite ^/redirect_me 301 Moved permanent;'
 }
 service { 'nginx':
   ensure  => running,
