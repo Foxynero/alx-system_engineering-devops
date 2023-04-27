@@ -1,7 +1,6 @@
-Host *
- IgnoreUnknown AddKeysToAgent,UseKeychain
- AddKeysToAgent yes
- UseKeychain yes
- IdentityFile ~/.ssh/id_rsa
- IdentityFile ~/.ssh/school
- PasswordAuthentication no
+# connect to a server without typing a password
+Host 163701-web-01
+User ubuntu
+HostName 35.153.231.72
+IdentityFile ~/.ssh/school
+PasswordAuthentication no
