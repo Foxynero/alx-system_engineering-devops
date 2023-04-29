@@ -2,5 +2,4 @@
 # return page with Hello Holberton when querying the root of it
 # Run Apache on the 265-0 Docker container.
 echo "ServerName localhost" >> /etc/apache2.conf
-echo "Hello Holberton"
 service apache2 start
