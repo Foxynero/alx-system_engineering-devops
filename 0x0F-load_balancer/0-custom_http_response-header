@@ -2,7 +2,7 @@
 # Configure custom Nginx response header to track HTTP requests to web servers
 apt-get -y update
 apt-get -y install nginx
-echo "HSchool" > /var/www/html/index.html
+echo "School" > /var/www/html/index.html
 sed -i '/^\tserver_name.*/a \\trewrite ^/redirect_me https://www.school.com/ permanent;' /etc/nginx/sites-available/default
 echo "Ceci n'est pas une page" > /var/www/html/custom_404.html
 sed -i '/^\tserver_name.*/a \\terror_page 404 /custom_404.html;\n\tlocation = /custom_404.html {\n\troot /var/www/html/;\n\tinternal;\n\t}' /etc/nginx/sites-available/default
