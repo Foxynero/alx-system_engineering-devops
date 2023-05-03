@@ -11,6 +11,4 @@ file { '/etc/nginx/conf.d/custom-header.conf':
 
 service { 'nginx':
   ensure    => running,
-  enable    => true,
-  subscribe => File['/etc/nginx/conf.d/custom-header.conf'],
 }
