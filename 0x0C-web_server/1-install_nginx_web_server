@@ -5,6 +5,7 @@
 # using curl, it must return a page that contains the string Holberton School
 
 apt-get -y update
-apt-get install -y nginx
-echo "Hello World!" | sudo tee /val/www/html/index.html
-service nginx restart
+apt-get -y install nginx
+ufw allow 'Nginx HTTP'
+echo 'Hello World!' > /var/www/html/index.html
+service nginx start
