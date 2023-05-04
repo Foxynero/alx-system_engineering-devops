@@ -1,4 +1,4 @@
-i#!/usr/bin/env bash
+#!/usr/bin/env bash
 # Installs Nginx with the following configurations:
 #+    Listens on port 80.
 #+    Returns a page containing "Hello World" when queried
@@ -6,5 +6,6 @@ i#!/usr/bin/env bash
 
 apt-get -y update
 apt-get -y install nginx
-echo "Hello World" > /var/www/html/index.html
-service nginx restart
+ufw allow 'Nginx HTTP'
+echo 'Hello World!' > /var/www/html/index.html
+service nginx start
