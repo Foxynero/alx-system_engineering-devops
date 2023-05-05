@@ -1,14 +1,26 @@
 #!/usr/bin/env bash
-# Usage: ./1-world_wide_web <domain> <subdomain>
-# Display information about subdomains.
-if [ $# -eq 1 ]; then
-    for x in www lb-01 web-01 web-02; do
-	R=$(dig "$x"."$1" | grep -A1 "ANSWER SECTION:" | tail -1 | awk '{print $4}')
-	IP=$(dig "$x"."$1" | grep -A1 "ANSWER SECTION:" | tail -1 | awk '{print $5}')
-	echo "The subdomain $x is a $R record and points to $IP"
-    done
-elif [ $# -eq 2 ]; then
-    R=$(dig "$2"."$1" | grep -A1 "ANSWER SECTION:" | tail -1 | awk '{print $4}')
-    IP=$(dig "$2"."$1" | grep -A1 "ANSWER SECTION:" | tail -1 | awk '{print $5}')
-    echo "The subdomain $2 is a $R record and points to $IP"
+# Bash script that will display information about subdomains.
+function domain_check {
+	domain_names=("www" "lb-01" "web-01" "web-02")
+
+	for i in "${domain_names[@]}";
+	do
+		dig "${i}"."$1" | grep -A1 'ANSWER SECTION:' | \
+		awk 'FNR == 2 {printf "The subdomain %s is a %s record and points to %s\n", var, $4, $5}' var="$i"
+	done
+}
+
+function subdomain_check {
+	dig "${2}"."$1" | grep -A1 'ANSWER SECTION:' | \
+	awk 'FNR == 2 {printf "The subdomain %s is a %s record and points to %s\n", var, $4, $5}' var="$2"
+}
+
+if [ $# -lt 1 ]
+then
+	echo "*** Provide domain name ***"
+elif [ $# -eq 1 ]
+then
+	domain_check "$1";
+else
+	subdomain_check "$1" "$2";
 fi
