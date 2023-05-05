@@ -4,11 +4,13 @@ package { 'nginx':
   ensure => installed,
 }
 
-file { '/etc/nginx/conf.d/custom_header.conf'':
+file { '/etc/nginx/conf.d/custom_header.conf':
+  ensure => 'present',
+  path   => '/etc/nginx/conf.d/custom_header.conf',
   content => "add_header X-Served-By $hostname;",
-  target  => '/etc/nginx/conf.d/custom_header.conf',
 }
 
 service { 'nginx':
-  ensure    => running,
+  ensure => running,
+  require => Package['nginx'],
 }
