@@ -6,13 +6,13 @@
 sudo apt update
 sudo apt install -y nginx
 sudo ufw allow 'Nginx HTTP'
-echo "Hello World!" | sudo tee /usr/share/nginx/html/custom_404.html
+echo "Hello World!" | sudo tee /var/www/html/custom_404.html
 # OR
 # echo "Hello World!" > index.html
 # sudo mv index.html /var/www/html
 
-echo "Error 404: Not found:" | sudo tee /usr/share/nginx/html/custom_404.html
-echo "Ceci n'est pas une page" | sudo tee -a /usr/share/nginx/html/custom_404.html
+echo "Error 404: Not found:" | sudo tee /var/www/html/custom_404.html
+echo "Ceci n'est pas une page" | sudo tee -a /var/www/html/custom_404.html
 echo "server {
 	listen 80 default_server;
         listen [::]:80 default_server;
@@ -24,7 +24,7 @@ echo "server {
 	
 	error_page 404 /custom_404.html;
 	location = /custom_404.html {
-	root /usr/share/nginx/html;
+	root /var/www/html;
 	internal;
 	}
 }" > default
