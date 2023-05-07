@@ -6,12 +6,7 @@
 sudo apt update
 sudo apt install -y nginx
 sudo ufw allow 'Nginx HTTP'
-echo "Hello World!" | sudo tee /var/www/html/custom_404.html
-# OR
-# echo "Hello World!" > index.html
-# sudo mv index.html /var/www/html
 
-echo "Error 404: Not found:" | sudo tee /var/www/html/custom_404.html
 echo "Ceci n'est pas une page" | sudo tee -a /var/www/html/custom_404.html
 echo "server {
 	listen 80 default_server;
