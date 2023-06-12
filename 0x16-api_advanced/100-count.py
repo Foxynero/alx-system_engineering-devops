@@ -3,6 +3,7 @@
 import requests
 
 def count_words(subreddit, word_list, after=None, count={}):
+    
     """
     a recursive function that queries the Reddit API,
     parses the title of all hot articles, and prints a
@@ -15,6 +16,7 @@ def count_words(subreddit, word_list, after=None, count={}):
         word_list - contains the same word (case-insensitive),
             the final count should be the sum of each duplicate
     """
+    
     if word_list == []:
         return None
     else:
