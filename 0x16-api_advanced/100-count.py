@@ -2,7 +2,6 @@
 """A script for counting hot terms on subreddits"""
 import requests
 
-
 def count_words(subreddit, word_list, after=None, count={}):
     """
     a recursive function that queries the Reddit API,
@@ -42,11 +41,11 @@ def count_words(subreddit, word_list, after=None, count={}):
         title = title.split(' ')
         for word in word_list:
             count[word] += title.count(word)
-    after = data.get("after")
-    if after is not None:
-        return count_words(subreddit, word_list, after, count)
-    else:
-        sorted_subs = sorted(count.items(), key=lambda x: (-x[1], x[0]))
-        for i in sorted_subs:
-            if i[1] != 0:
-                print(i[0] + ": " + str(i[1]))
+        after = data.get("after")
+        if after is not None:
+            return count_words(subreddit, word_list, after, count)
+        else:
+            sorted_subs = sorted(count.items(), key=lambda x: (-x[1], x[0]))
+            for i in sorted_subs:
+                if i[1] != 0:
+                    print(i[0] + ": " + str(i[1]))
