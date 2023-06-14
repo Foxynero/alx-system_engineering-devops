@@ -14,26 +14,36 @@ server {
     # Serve /airbnb-onepage/ route on AirBnB_clone_v2
     location = /airbnb-onepage/ {
         proxy_pass http://localhost:5000/airbnb-onepage/;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
     }
 
     # Serve /number_odd_or_even/ route on AirBnB_clone_v2
     location ~ /airbnb-dynamic/number_odd_or_even/(\d+)$ {
         proxy_pass http://127.0.0.1:5001/number_odd_or_even/$1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
     }
 
     # Serve AirBnB_clone_v3 API
     location /api/ {
-        proxy_pass http://127.0.0.1:5002/api;
+        proxy_pass http://127.0.0.1:5002/api/;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
     }
 
     # Configure /2-hbnb route of AirBnB_clone_v4 as root location
     location / {
         proxy_pass http://127.0.0.1:5003/2-hbnb;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
     }
 
     # Serve static content for AirBnB_clone_v4
     location /static {
         proxy_pass http://127.0.0.1:5003;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
     }
 
     # 404 error page
