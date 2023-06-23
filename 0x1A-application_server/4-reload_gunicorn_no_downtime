@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 # Get the process ID of the Gunicorn master process
 # Send a HUP signal to the Gunicorn master process to initiate a graceful reload
-kill -HUP 'ps -C gunicorn fch -o pid | head -n 1'
+ps aux |grep gunicorn |grep yourapp | awk '{ print $2 }' |xargs kill -HUP
