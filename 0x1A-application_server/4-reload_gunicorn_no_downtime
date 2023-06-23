@@ -2,10 +2,10 @@
 # Get the process ID of the Gunicorn master process
 # Send a HUP signal to the Gunicorn master process to initiate a graceful reload
 
-pid="$(cat /usr/bin/gunicorn.pid)"
-kill -HUP "$pid"
+pid="$(cat /bin/gunicorn.pid)"
+kill -HUP $pid
 sleep 5
-if kill -0 "$pid" >/dev/null 2>&1; then
+if kill -0 $pid >/dev/null 2>&1; then
 	echo "Gunicorn reload failed."
 	exit 1
 else
