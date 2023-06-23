@@ -1,4 +1,24 @@
 #!/usr/bin/env bash
 # Get the process ID of the Gunicorn master process
 # Send a HUP signal to the Gunicorn master process to initiate a graceful reload
-ps aux |grep gunicorn |grep yourapp | awk '{ print $2 }' |xargs kill -HUP
+
+oldpid=$(<./deploy/gunicorn.pid)
+  # forget the old kill -HUP 
+  kill -USR2 "$oldpid"
+  sleep 1
+  timeout=5
+  while [[ $timeout -gt 0 ]]; do
+    newpid=$(<./deploy/gunicorn.pid.2)
+    if kill -0 "$newpid" >/dev/null 2>&1; then
+      break
+    else
+      sleep 0.5
+      (( timeout-- ))
+    fi
+  done
+
+  # shutdown old
+  echo "success. newpid=$newpid"
+  kill -WINCH "$oldpid"
+  sleep 1
+  kill -TERM "$oldpid"
