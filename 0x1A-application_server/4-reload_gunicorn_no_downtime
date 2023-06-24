@@ -2,13 +2,4 @@
 # Get the process ID of the Gunicorn master process
 # Send a HUP signal to the Gunicorn master process to initiate a graceful reload
 
-pid="$(cat /bin/gunicorn.pid)"
-kill -HUP $pid
-sleep 5
-if kill -0 $pid >/dev/null 2>&1; then
-	echo "Gunicorn reload failed."
-	exit 1
-else
-	echo "Gunicorn reloaded successfully."
-fi
-exit 0
+ps -C gunicorn --no-headers -o ppid,pid | awk '$1=="1" {print $2}' | while read -r pid; do sudo kill -s HUP "$pid"; done
