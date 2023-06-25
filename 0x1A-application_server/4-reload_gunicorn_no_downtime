@@ -2,4 +2,10 @@
 # Get the process ID of the Gunicorn master process
 # Send a HUP signal to the Gunicorn master process to initiate a graceful reload
 
-systemctl status gunicorn | sed -n 's/.*Main PID: \(.*\)$/\1/g p' | cut -f1 -d' ' | xargs kill -HUP
+kill -HUP 87885
+sleep 5
+if ! kill -0 87885 2>/dev/null; then
+	echo "Reloading Gunicorn failed. Check the logs for more information."
+else
+	echo "Gunicorn reloaded successfully."
+fi
