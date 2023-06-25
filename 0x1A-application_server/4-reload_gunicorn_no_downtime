@@ -2,7 +2,7 @@
 # Get the process ID of the Gunicorn master process
 # Send a HUP signal to the Gunicorn master process to initiate a graceful reload
 
-kill -HUP 87885
+kill -SIGHUP 87885
 sleep 5
 if ! kill -0 87885 2>/dev/null; then
 	echo "Reloading Gunicorn failed. Check the logs for more information."
